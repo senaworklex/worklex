@@ -1,0 +1,24 @@
+services:
+
+  worklex_persistencia:
+    image: postgres:16
+    container_name: WorkLex_persistencia
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: SENA
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Admin123*
+    ports:
+      - "5432:5432"
+    volumes:
+      - WorkLex_sena_data:/var/lib/postgresql/data
+    networks:
+      - worklex_network
+
+volumes:
+  WorkLex_sena_data:
+
+networks:
+  worklex_network:
+    name: worklex_network
+    external: true
