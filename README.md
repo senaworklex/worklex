@@ -1,3 +1,9 @@
+# Worklex
+
+Proyecto SENA para implementar una herramienta que permita trabajar con diccionarios digitales por temáticas.
+
+---
+
 ## 📋 Requisitos
 
 Tener instalado:
@@ -9,29 +15,35 @@ Tener instalado:
 
 ## ⚙️ Instalación paso a paso
 
-1. Clonar el repositorio:
+### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/jeansebastiansalinas/proyecto_sena.git
-cd proyecto_sena
+git clone https://github.com/senaworklex/worklex.git
+cd worklex
 ```
 
 ---
 
-2. Crear archivo de entorno:
+### 2. Crear la red compartida
 
-En Windows:
-
-```powershell
-copy .env.example .env
+```bash
+docker network create worklex_network
 ```
 
 ---
 
-3. Levantar el proyecto:
+### 3. Levantar la base de datos
 
 ```bash
-docker-compose up --build
+docker-compose -p worklex_persistencia -f docker-compose.db.yml up -d
+```
+
+---
+
+### 4. Levantar la aplicación
+
+```bash
+docker-compose -p worklex_aplicacion up --build
 ```
 
 ---
@@ -41,14 +53,12 @@ docker-compose up --build
 * Frontend: http://localhost:5173
 * Backend: http://localhost:8000
 
+---
 
-
-
-## 🛑 Si algo falla:
+## 🛑 Si algo falla
 
 ```bash
 docker-compose down
 docker system prune -f
-docker-compose up --build
+docker-compose -p worklex_aplicacion up --build
 ```
-
